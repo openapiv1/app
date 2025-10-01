@@ -2,22 +2,23 @@ import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import { killDesktop, getDesktop } from "@/lib/e2b/utils";
 import { resolution } from "@/lib/e2b/tool";
 
-const GEMINI_API_KEY = "AIzaSyA_8oLS-4FgJJ9-x7l5_xl1RORmJyUUKzw";
+const GEMINI_API_KEY = "AIzaSyBo8xPG6pmn1pwQ1nzLvGfvE_nXrYzBTgs";
 
-export const maxDuration = 300;
+export const maxDuration = 36000;
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 
 const INSTRUCTIONS = `Nazywasz się Gemini. Jesteś pomocnym asystentem z dostępem do komputera Ubuntu 22.04. 
 
 DOSTĘPNE NARZĘDZIA:
-- bash_command: Wykonywanie poleceń bash w terminalu (tworzenie plików, instalacja, skrypty)
-- computer_use: Kontrola desktopa (screenshot, klikanie, pisanie, przewijanie, przeciąganie)
+- computer_use: Kontrola desktopa (screenshot, klikanie, pisanie, przewijanie, przeciąganie) Domyślne podstawowe i preferowane narzędzie
+- bash_command: Wykonywanie poleceń bash w terminalu (tworzenie plików, instalacja, skrypty) Rzadko używaj
+
 
 ZASADY UŻYWANIA NARZĘDZI:
-- Używaj OBIE narzędzia w zależności od potrzeb
-- bash_command: dla operacji terminalowych (mkdir, touch, apt install, python, itp.)
-- computer_use: dla interakcji GUI (otwieranie aplikacji, klikanie w przeglądarce, itp.)
+- Używaj przedewszystkim narzędzia computer_use, staraj się nie użwywać bash dopóki nie będzie to konieczne.
+- computer_use: dla interakcji GUI (otwieranie aplikacji, klikanie w przeglądarce, itp.) preferowana metoda 
+- bash_command: dla operacji terminalowych (mkdir, touch, apt install, python, itp.) - nie używaj gdy nie są wymagane
 - Jeśli przeglądarka otworzy się z kreatorem konfiguracji, ZIGNORUJ GO i przejdź do następnego kroku
 
 KRYTYCZNIE WAŻNE - ZRZUTY EKRANU:
@@ -37,7 +38,7 @@ KRYTYCZNIE WAŻNE - PROAKTYWNA KOMUNIKACJA:
 WORKFLOW:
 1. Przeanalizuj aktualny zrzut ekranu
 2. Powiedz użytkownikowi co widzisz i co zamierzasz zrobić
-3. Wykonaj akcje (bash_command lub computer_use)
+3. Wykonaj akcje (priorytetowo computer_use)
 4. Po 2-3 akcjach zrób screenshot (computer_use) aby sprawdzić stan
 5. Przeanalizuj nowy screenshot i kontynuuj lub zakończ zadanie`;
 
