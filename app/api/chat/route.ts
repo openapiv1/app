@@ -2,7 +2,7 @@ import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import { killDesktop, getDesktop } from "@/lib/e2b/utils";
 import { resolution } from "@/lib/e2b/tool";
 
-const GEMINI_API_KEY = "AIzaSyBo8xPG6pmn1pwQ1nzLvGfvE_nXrYzBTgs";
+const GEMINI_API_KEY = "AIzaSyAS1iUvQnp9G5C7gIW8Ju2QXwVVcs1hJjQ";
 
 export const maxDuration = 36000;
 
